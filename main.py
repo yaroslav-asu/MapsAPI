@@ -6,7 +6,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 
 SCREEN_SIZE = [600, 450]
-coords = input("Введите координаты места: ")
+coords = input("Введите координаты места и zoom через ,: ").split(',')
 
 class Example(QWidget):
     def __init__(self):
@@ -15,8 +15,8 @@ class Example(QWidget):
         self.initUI()
 
     def getImage(self):
-        map_request = f"http://static-maps.yandex.ru/1.x/?ll={coords[0]},{coords[1]}&spn=0.002," \
-                      f"0.002&l=map"
+        map_request = f"http://static-maps.yandex.ru/1.x/?ll={coords[0]},{coords[1]}&z=" \
+                      f"{coords[2]}&l=map"
         response = requests.get(map_request)
 
         if not response:
